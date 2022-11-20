@@ -19,9 +19,26 @@
         #game-board {
             background-color: rgb(179, 178, 178);
             width:100vmin;
-            
+            height:100vmin;
+            display: grid;
+            grid-template-rows: repeat(21, 1fr);
+            grid-template-columns: repeat(21 , 1fr);
+
+        }
+
+        .snake {
+            background-color: rgb(139, 139, 228);
+            /*linear-gradient(to bottom, 
+            #4c33b3 0%, #ff99cc 100%);*/
+            border: .25vmin solid black;
+        }
+
+        .food {
+            background-color: rgb(128, 155, 128);
+            border: .25vmin solid black;
         }
     </style>
+    <script src="game.js" defer type="module"></script>
 </head>
 <body>
     <div id="game-board"></div>
