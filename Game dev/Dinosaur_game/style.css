@@ -1,39 +1,60 @@
-* {
-    padding: 0;
-    margin: 0;
+*, *::before, *::after {
+    box-sizing: border-box;
+    /* prevents highlighting. */
+    user-select: none; 
 }
 
-#game {
-    width: 500px;
-    height: 200px;
-    border: 1px solid black;
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
-#character {
-    width: 20px;
-    height: 50px;
-    background-color: red;
+
+.world {
+    overflow: hidden;
     position: relative;
-    top: 150px;
 }
-.animate {
-    animation: jump 500ms;
+
+.score {
+    position:absolute;
+    font-size: 3vmin;
+    right: 1vmin;
+    top: 1vmin;
 }
-@keyframes jump {
-    0%{top: 150px;}
-    30%{top: 100px;}
-    70%{top: 100px;}
-    100%{top: 150px;}
+
+.start-screen {
+    position: absolute;
+    font-size: 5vmin;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-#block {
-    width: 20px;
-    height: 20px;
-    background-color: blue;
-    position: relative;
-    top: 130px;
-    left: 480px;
-    animation: block 1s infinite linear;
+
+.hide {
+    display: none;
 }
-@keyframes block {
-    0%{left:480px;}
-    100%{left:-40px;}
+
+.ground {
+    --left: 0;
+    position: absolute;
+    width: 300%;
+    bottom: 0;
+    left: calc(var(--left) * 1%);
+}
+
+.dino {
+    --bottom: 0;
+    position: absolute;
+    left: 1%;
+    height: 30%;
+    bottom: calc(var(--bottom) * 1%);
+}
+
+.cactus {
+    position: absolute;
+    left: calc(var(--left) * 1%);
+    height: 30%;
+    bottom: 0;
 }
