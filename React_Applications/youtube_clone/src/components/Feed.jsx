@@ -3,6 +3,8 @@ import { Box, Stack, Typography } from '@mui/material';
 import { SideBar, Videos } from './';
 import { fetchFromAPI } from '../utils/fetchFromAPI';
 
+// This is the Side Bar and its categories
+
 const Feed = () => {
 
   const [selectedCategory, setSelectedCategory] = useState('New');
@@ -22,7 +24,8 @@ const Feed = () => {
       <Box sx={{ // made the body dark (black)
         height: { sx: 'auto', md: '92vh' }, 
         borderRight: '1px solid #3d3d3d',
-        px: { sx: 0, md: 2 } // px = padding horizontal
+        px: { sx: 0, md: 2 }, // px = padding horizontal
+        backgroundColor: 'rgba(0, 0, 0, 0.1)', // dark transparent background
         }}> 
         <SideBar 
           selectedCategory={selectedCategory}
@@ -31,11 +34,11 @@ const Feed = () => {
         
         
         <Typography className='copyright' variant='body2' sx={{ mt: 1.5, color: '#fff' }}> 
-          <h2>BoxTube</h2>
+          <p>Copyright 2023 BoxTube</p>
         </Typography>
       </Box>
 
-      <Box p={2} sx={{ overflowY: 'auto', height: '90vh', flex: 2}}>
+      <Box p={2} sx={{ overflowY: 'auto', height: '90vh', flex: 2}} paddingLeft={{xs: '10px', md: '55px'}}>
         <Typography variant='h4' fontWeight="bold" marginBottom={2} sx={{ color: 'white' }}>
           {selectedCategory} <span style={{ color: 'white' }}>videos</span>
         </Typography>

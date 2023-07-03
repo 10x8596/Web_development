@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from'react-router-dom';
 import { Box } from '@mui/material'; // simple div element
 import { Navbar, ChannelDetail, Feed, SearchFeed, VideoDetail } from './components';
+import { alpha } from '@mui/system';
 
 
 const App = () => (
@@ -8,11 +9,12 @@ const App = () => (
     // path of root route
     // if we go to forward slash video and then some random sequence of alphanumerical characters
     // we will be routed to a specific video's page
+    // whole page background color is set to #000
     <BrowserRouter>
-        <Box sx={{ backgroundColor: '#000' }}>
+        <Box sx={{ backgroundColor: alpha('#000', 1)}}>
             <Navbar />
             <Routes>
-                <Route path="/" exact element={<Feed />} />
+                <Route exact path="/" element={<Feed />} />
                 <Route path="/video/:id" element={<VideoDetail />} />
                 <Route path="/channel/:id" element={<ChannelDetail />} />
                 <Route path="/search/:searchTerm" element={<SearchFeed />} />
@@ -22,4 +24,4 @@ const App = () => (
   );
 
 
-export default App
+export default App;
