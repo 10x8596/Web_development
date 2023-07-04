@@ -48,7 +48,8 @@ const VideoCard = ({ video: { id: { videoId }, snippet } }) => { // viewCount, l
                 bottom: { md: 0 }, // Positioned at the bottom
                 zIndex: { md: 1 }, // Increased z-index to cover the Card
                 '&:hover': {
-                    backgroundColor: 'rgba(218,64,102, 0.8)'
+                    backgroundColor: 'rgba(218,64,102, 0.8)',
+                    backdropFilter: 'blur(4px)'
                 }
             }} className="content">
                 <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
