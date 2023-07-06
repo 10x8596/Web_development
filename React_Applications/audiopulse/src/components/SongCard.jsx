@@ -7,9 +7,16 @@ import { playPause, setActiveSong } from "../redux/features/playerSlice";
 // From Discover component, we know that we are passing a couple of params into the SongCard component as props.
 const SongCard = ({ song, activeSong, isPlaying, data, i }) => {
 
-  const handlePauseClick = () => {}
+  const dispatch = useDispatch();
 
-  const handlePlayClick = () => {}
+  const handlePauseClick = () => {
+    dispatch(playPause(false));
+  }
+
+  const handlePlayClick = () => {
+    dispatch(setActiveSong({ song, data, i }));
+    dispatch(playPause(true));
+  }
 
   return (
     <div className="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
