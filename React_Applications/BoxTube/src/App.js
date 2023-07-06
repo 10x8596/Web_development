@@ -11,7 +11,7 @@ const App = () => (
     // we will be routed to a specific video's page
     // whole page background color is set to #000
     <BrowserRouter>
-        <Box sx={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(255,0,0,0.2))'}}>
+        <Box sx={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 1), rgba(107,34,34,0.8))'}}>
             <Navbar />
             <Routes>
                 <Route exact path="/" element={<Feed />} />
