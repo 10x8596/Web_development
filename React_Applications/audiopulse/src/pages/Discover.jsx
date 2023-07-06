@@ -1,8 +1,12 @@
+import { useDispatch, useSelector} from 'react-redux'; // these are hooks
 import { Error, Loader, SongCard } from "../components";
 import { genres } from "../assets/constants";
 import { useGetTopChartsQuery } from '../redux/services/shazamCore';
 
 const Discover = () => {
+    // we can call hooks right at the top of the component
+    const dispatch = useDispatch();
+    const { activeSong, isPlaying } = useSelector((state) => state.player);
 
     {/* we get the actual data which is the result of the API call,
         we get the isFetching property which allows us to know if we're currently fetching therefor we can show the loading state 
@@ -22,7 +26,7 @@ const Discover = () => {
                     onChange={() => {}}
                     value = ''
                     className="bg-black text-gray-300 p-3 text-sm rounded-lg 
-                                outline-none sm:mt-0 mt-5 bg-opacity-30 shadow-lg hover:shadow-sm"
+                                outline-none sm:mt-0 mt-5 bg-opacity-30 shadow-lg hover:shadow-sm shadow-[#44112f]"
                 >
                     {/* map over the genres */}
                     {genres.map((genre) => <option key={genre.value} value={genre.value}>{genre.title}</option>)}
@@ -35,6 +39,9 @@ const Discover = () => {
                     <SongCard 
                         key={song.key}
                         song={song}
+                        activeSong={activeSong}
+                        isPlaying={isPlaying}
+                        data={data}
                         i={i}
                     />
                 ))}
