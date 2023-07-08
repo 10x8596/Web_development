@@ -23,3 +23,7 @@ export const links = [
   { name: 'Top Artists', to: '/top-artists', icon: HiOutlineUserGroup },
   { name: 'Top Charts', to: '/top-charts', icon: HiOutlineHashtag },
 ];
+
+import logoImage from './Colorlogo-nobackground.png'
+
+export const logoAP = logoImage;
