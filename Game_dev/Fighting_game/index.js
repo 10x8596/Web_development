@@ -70,12 +70,16 @@ const player1 = new Fighter({
       imageSource: "asset/samuraiMack/Fall.png",
       framesMax: 2,
     },
-    attack1: {
+    attack: {
       imageSource: "asset/samuraiMack/Attack1.png",
       framesMax: 6,
     },
-    attack2: {
-      imageSource: "asset/samuraiMack/Attack2.png",
+    takeHit: {
+      imageSource: "asset/samuraiMack/Take Hit - white silhouette.png",
+      framesMax: 4,
+    },
+    death: {
+      imageSource: "asset/samuraiMack/Death.png",
       framesMax: 6,
     },
   },
@@ -126,13 +130,17 @@ const player2 = new Fighter({
       imageSource: "asset/kenji/Fall.png",
       framesMax: 2,
     },
-    attack1: {
-      imageSource: "asset/kenji/Attack1.png",
-      framesMax: 4,
-    },
-    attack2: {
+    attack: {
       imageSource: "asset/kenji/Attack2.png",
       framesMax: 4,
+    },
+    takeHit: {
+      imageSource: "asset/kenji/Take hit.png",
+      framesMax: 3,
+    },
+    death: {
+      imageSource: "asset/kenji/Death.png",
+      framesMax: 7,
     },
   },
   attackBox: {
@@ -173,38 +181,46 @@ const keys = {
 // event listeners to move sprites
 // this event is when a key is pressed
 window.addEventListener("keydown", (event) => {
-  // switch case statement to determine which key does what
-  switch (event.key) {
-    // player1 movement
-    case "d":
-      keys.d.pressed = true;
-      player1.lastKey = "d";
-      break;
-    case "a":
-      keys.a.pressed = true;
-      player1.lastKey = "a";
-      break;
-    case "w":
-      player1.velocity.y = -15;
-      break;
-    case "s":
-      player1.attack();
-      break;
-    // player2 movement
-    case "ArrowRight":
-      keys.ArrowRight.pressed = true;
-      player2.lastKey = "ArrowRight";
-      break;
-    case "ArrowLeft":
-      keys.ArrowLeft.pressed = true;
-      player2.lastKey = "ArrowLeft";
-      break;
-    case "ArrowUp":
-      player2.velocity.y = -15;
-      break;
-    case "ArrowDown":
-      player2.attack();
-      break;
+  // if player1 is not dead, then allow keydown events
+  if (!player1.dead) {
+    // switch case statement to determine which key does what
+    switch (event.key) {
+      // player1 movement
+      case "d":
+        keys.d.pressed = true;
+        player1.lastKey = "d";
+        break;
+      case "a":
+        keys.a.pressed = true;
+        player1.lastKey = "a";
+        break;
+      case "w":
+        player1.velocity.y = -15;
+        break;
+      case "s":
+        player1.attack();
+        break;
+    }
+  }
+  if (!player2.dead) {
+    // if player2 is not dead, then allow keydown events
+    switch (event.key) {
+      // player2 movement
+      case "ArrowRight":
+        keys.ArrowRight.pressed = true;
+        player2.lastKey = "ArrowRight";
+        break;
+      case "ArrowLeft":
+        keys.ArrowLeft.pressed = true;
+        player2.lastKey = "ArrowLeft";
+        break;
+      case "ArrowUp":
+        player2.velocity.y = -15;
+        break;
+      case "ArrowDown":
+        player2.attack();
+        break;
+    }
   }
 });
 // this event is when a key is released
@@ -279,7 +295,7 @@ function animate() {
     player2.switchSprite("fall");
   }
 
-  // Detect Collision for player1 attack
+  // Detect Collision for player1 attack and player2 takes hit
   if (
     /* Check for collision detection and Check if player1 is actually attacking */
     collisionDetection({
@@ -289,8 +305,8 @@ function animate() {
     player1.isAttacking &&
     player1.framesCurrent === 4
   ) {
+    player2.takeHit();
     player1.isAttacking = false;
-    player2.health -= 5;
     document.querySelector("#player2Health").style.width = player2.health + "%";
   }
 
@@ -299,7 +315,7 @@ function animate() {
     player1.isAttacking = false;
   }
 
-  // Detect Collision for player2 attack
+  // Detect Collision for player2 attack and player1 takes hit
   if (
     /* Check for collision detection and Check if player2 is actually attacking */
     collisionDetection({
@@ -309,8 +325,8 @@ function animate() {
     player2.isAttacking &&
     player2.framesCurrent === 2
   ) {
+    player1.takeHit();
     player2.isAttacking = false;
-    player1.health -= 5;
     document.querySelector("#player1Health").style.width = player1.health + "%";
   }
 
