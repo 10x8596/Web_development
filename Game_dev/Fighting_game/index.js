@@ -85,7 +85,7 @@ const player1 = new Fighter({
   },
   attackBox: {
     offset: {
-      x: 300,
+      x: 200,
       y: 5,
     },
     width: 140,
@@ -254,6 +254,8 @@ function animate() {
   context.fillRect(0, 0, canvas.width, canvas.height);
   background.update();
   shop.update();
+  context.fillStyle = "rgba(255, 255, 255, 0.15)";
+  context.fillRect(0, 0, canvas.width, canvas.height);
   player1.update();
   player2.update();
 
@@ -307,7 +309,10 @@ function animate() {
   ) {
     player2.takeHit();
     player1.isAttacking = false;
-    document.querySelector("#player2Health").style.width = player2.health + "%";
+    // decrease player health when hit
+    gsap.to("#player2Health", {
+      width: player2.health + "%",
+    });
   }
 
   // if player1 misses attack
@@ -327,7 +332,10 @@ function animate() {
   ) {
     player1.takeHit();
     player2.isAttacking = false;
-    document.querySelector("#player1Health").style.width = player1.health + "%";
+    // decrease player health when hit
+    gsap.to("#player1Health", {
+      width: player1.health + "%",
+    });
   }
 
   // if player2 misses attack
